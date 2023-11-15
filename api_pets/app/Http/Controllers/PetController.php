@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pet;
 use Illuminate\Http\Request;
 
+
 class PetController extends Controller
 {
     public function index()
@@ -12,6 +13,7 @@ class PetController extends Controller
         try {
             $pets = Pet::all();
             return $pets;
+
         } catch (\Throwable $th) {
             return;
         }
@@ -23,5 +25,19 @@ class PetController extends Controller
         $pet =  Pet::create($data);
 
         return $pet;
+    }
+
+    public function destroy ($id) {
+        try {
+            // Busca a pessoa pelo ID
+            $pet = Pet::find($id);
+
+            $pet->delete();
+            return  'Deletado com sucesso.';
+
+        } catch (\Exception $e) {
+            return;
+        }
+
     }
 }
