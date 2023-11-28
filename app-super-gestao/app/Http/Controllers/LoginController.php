@@ -3,56 +3,66 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\User;
 
 class LoginController extends Controller
 {
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
+
         $erro = '';
-        if($request->get("erro") == 1){
-            $erro = "Usuário ou senha invalido";
+
+        if($request->get('erro') == 1) {
+            $erro = 'Usuário e ou senha não existe';
         }
 
-        return view("site.login", ['erro' => $erro]);
+        if($request->get('erro') == 2) {
+            $erro = 'Necessario realizar login para ter acesso a página';
+        }
+
+        return view('site.login', ['titulo' => 'Login', 'erro' => $erro]);
     }
 
-    public function autenticar(Request $request)
-    {
-        // regras para validação de email
+    public function autenticar(Request $request) {
+
+        //regras de validação
         $regras = [
-            "usuario" => "required|email",
-            "senha" => "required",
+            'usuario' => 'email',
+            'senha' => 'required'
         ];
 
+        //as mensagens de feedback de validação
         $feedback = [
-            "usuario.required" => "Campo usuário (email) é obrigatório",
-            "usuario.email" => "Este não é um email válido",
-            "senha.required" => "Campo senha é obrigatório",
+            'usuario.email' => 'O campo usuário (e-mail) é obrigatório',
+            'senha.required' => 'O campo senha é obrigatório'
         ];
 
+        //se não passar no validate
         $request->validate($regras, $feedback);
 
-        //recupera os parametros do formulario
+        //recuperamos os parâmetros do formulário
         $email = $request->get('usuario');
         $password = $request->get('senha');
 
-        //inicia o model user
+        echo "Usuário: $email | Senha: $password";
+        echo "<br>";
+
+        //iniciar o Model User
         $user = new User();
 
-        $ususario =  $user->where('email', $email)->where('password', $password)->first();
+        $usuario = $user->where('email', $email)
+                    ->where('password', $password)
+                    ->get()
+                    ->first();
 
-         if(isset($ususario->name)) {
-            //iniciando a sessão
+        if(isset($usuario->name)) {
+
             session_start();
+            $_SESSION['nome'] = $usuario->name;
+            $_SESSION['email'] = $usuario->email;
 
-            $_SESSION['nome'] = $ususario->name;
-            $_SESSION['email'] = $ususario->email;
-
-            dd($_SESSION);
-
-        }else{
+            return redirect()->route('app.clientes');
+        } else {
             return redirect()->route('site.login', ['erro' => 1]);
-        };
+        }
     }
 }

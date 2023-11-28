@@ -1,67 +1,19 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+@extends('site.layouts.basico')
 
-<head>
-    <title>Super Gestão - Contato</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="{{ 'css/style.basic.css' }}">
-</head>
+@section('titulo', $titulo)
 
-<body>
-    <div class="topo">
-
-        <div class="logo">
-            <img src=" {{ asset('img/logo.png') }} ">
-        </div>
-
-        <div class="menu">
-            <ul>
-                <li><a href="{{ route('site.index') }}">Principal</a></li>
-                <li><a href="{{ route('site.sobrenos') }}">Sobre Nós</a></li>
-                <li><a href="{{ route('site.contato') }}">Contato</a></li>
-            </ul>
-        </div>
-    </div>
-
+@section('conteudo')
     <div class="conteudo-pagina">
         <div class="titulo-pagina">
             <h1>Entre em contato conosco</h1>
         </div>
-        @if ($errors->any())
-            <div style="width: 100%;  background:rgb(247, 167, 167); margin-top:15px">
-                @foreach ($errors->all() as $erro)
-                    {{ $erro }}
-                    <br>
-                @endforeach
-            </div>
-        @endif
+
         <div class="informacao-pagina">
             <div class="contato-principal">
-
-                <form action="{{ route('site.contato') }}" method="post">
-                    @csrf
-                    <input name="nome" type="text" placeholder="Nome" class="borda-preta">
-                    {{$errors->has('nome') ? $errors->first('nome') : ''}}
-                    <br>
-                    <input name="telefone" type="text" placeholder="Telefone" class="borda-preta">
-                    {{$errors->has('telefone') ? $errors->first('telefone') : ''}}
-                    <br>
-                    <input name="email" type="text" placeholder="E-mail" class="borda-preta">
-                    {{$errors->has('email') ? $errors->first('email') : ''}}
-                    <br>
-                    <select name="motivo_contato" class="borda-preta">
-                        <option value="">Qual o motivo do contato?</option>
-                        <option value="1">Dúvida</option>
-                        <option value="2">Elogio</option>
-                        <option value="3">Reclamação</option>
-                    </select>
-                    {{$errors->has('motivo_contato') ? $errors->first('motivo_contato') : ''}}
-                    <br>
-                    <textarea name="mensagem" class="borda-preta" placeholder="Preencha aqui a sua mensagem"></textarea>
-                    {{$errors->has('mensagem') ? $errors->first('mensagem') : ''}}
-                    <br>
-                    <button type="submit" class="borda-preta">ENVIAR</button>
-                </form>
+                @component('site.layouts._components.form_contato', ['classe' => 'borda-preta', 'motivo_contatos' => $motivo_contatos])
+                    <p>A nossa equipe analisará a sua mensagem e retornaremos o mais brevemente possível</p>
+                    <p>Nosso tempo médio de resposta é de 48 horas</p>
+                @endcomponent
             </div>
         </div>
     </div>
@@ -84,6 +36,4 @@
             <img src="{{ asset('img/mapa.png') }}">
         </div>
     </div>
-</body>
-
-</html>
+@endsection
