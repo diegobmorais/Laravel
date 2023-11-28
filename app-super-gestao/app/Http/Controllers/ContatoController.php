@@ -2,43 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SiteContato;
 use Illuminate\Http\Request;
-use App\SiteContato;
-use App\MotivoContato;
+use App\Http\Controllers\Controller;
 
 class ContatoController extends Controller
 {
-    public function contato(Request $request) {
+    public function contato(Request $request)
+    {
 
-        $motivo_contatos = MotivoContato::all();
-
-        return view('site.contato', ['titulo' => 'Contato (teste)', 'motivo_contatos' => $motivo_contatos]);
+        return view('site.contato');
     }
 
-    public function salvar(Request $request) {
-        $regras =             [
-            'nome' => 'required|min:3|max:40|unique:site_contatos',
+    public function save(Request $request){
+
+        $request->validate([
+            'nome' => 'required',
             'telefone' => 'required',
-            'email' => 'email',
-            'motivo_contatos_id' => 'required',
-            'mensagem' => 'required|max:2000'
-        ];
-
-        $feedback = [
-            'nome.min' => 'O campo nome precisa ter no mínimo 3 caracteres',
-            'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
-            'nome.unique' => 'O nome informado já está em uso',
-
-            'email.email' => 'O email informado não é válido',
-
-            'mensagem.max' => 'A mensagem deve ter no máximo 2000 caracteres',
-
-            'required' => 'O campo :attribute deve ser preenchido'
-        ];
-
-        $request->validate($regras, $feedback);
+            'email' => 'required|email',
+            'motivo_contato' => 'required',
+            'mensagem' => 'required',
+        ],
+    [
+        'nome.required'=> 'Nome é obrigatório',
+        'telefone.required'=> 'Telefone é obrigatório',
+        'email.required'=> 'Email é obrigatório',
+        'email.email'=> 'Este email não é valido',
+        'motivo_contato.required'=> 'Preencha o motivo do contato.',
+        'mensagem.required'=> 'Deixe-nos uma mensagem.',
+    ]);
 
         SiteContato::create($request->all());
+
         return redirect()->route('site.index');
     }
 }
+
+
