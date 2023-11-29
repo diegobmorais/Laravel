@@ -18,9 +18,9 @@ Route::post('/login', 'App\Http\Controllers\LoginController@autenticar')->name('
 
 // Agrupamento de rotas para /app
 Route::middleware('autenticacao:padrao')->prefix('/app')->group(function () {
-    Route::get('/clientes', function () { return 'Clientes'; })->name('app.clientes');
-    Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
-    Route::get('/produtos', function () {return 'produtos'; })->name('app.produtos');
+    Route::get('/clientes', function () {return 'Clientes';})->name('app.clientes');
+    Route::get('/fornecedores', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedores');
+    Route::get('/produtos', function () {return 'produtos';})->name('app.produtos');
 });
 
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('site.teste');
