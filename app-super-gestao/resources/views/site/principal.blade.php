@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+@extends('site.layouts.basico')
 
-<head>
-    <title>Super Gestão - Home</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="{{ 'css/style.basic.css' }}">
-</head>
+@section('titulo', 'Home')
 
-<body>
+@section('conteudo')
+
     <div class="topo">
-
         <div class="logo">
             <img src="{{ asset('img/logo.png') }}">
         </div>
@@ -55,6 +50,4 @@
             </div>
         </div>
     </div>
-</body>
-
-</html>
+@endsection

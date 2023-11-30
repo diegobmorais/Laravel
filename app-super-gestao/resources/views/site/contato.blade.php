@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+@extends('site.layouts.basico');
 
-<head>
-    <title>Super Gestão - Contato</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="{{ 'css/style.basic.css' }}">
-</head>
+@section('titulo', 'Contato');
 
-<body>
+@section('conteudo')
     <div class="topo">
-
         <div class="logo">
             <img src=" {{ asset('img/logo.png') }} ">
         </div>
@@ -38,7 +32,6 @@
         <div class="informacao-pagina">
             <div class="contato-principal">
                 @component('site.layouts._components.form_contato')
-
                 @endcomponent
             </div>
         </div>
@@ -62,6 +55,4 @@
             <img src="{{ asset('img/mapa.png') }}">
         </div>
     </div>
-</body>
-
-</html>
+@endsection

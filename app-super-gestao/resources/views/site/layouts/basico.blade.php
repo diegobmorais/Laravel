@@ -4,11 +4,10 @@
 <head>
     <title>Super Gestão - @yield('titulo')</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="{{'/css/style.basic.css'}}">
+    <link rel="stylesheet" href="{{ 'css/style.basic.css' }}">
 </head>
 
 <body>
-    @include('app.layouts._partials.topo')
     @yield('conteudo')
 </body>
 
