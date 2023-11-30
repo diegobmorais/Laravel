@@ -44,7 +44,7 @@ class LoginController extends Controller
         //inicia o model user
         $user = new User();
 
-        $ususario =  $user->where('email', $email)->where('password', $password)->first();
+        $ususario = $user->where('email', $email)->where('password', $password)->first();
 
         // fluxo para existencia de usuario no bd
         if (isset($ususario->name)) {
@@ -54,9 +54,15 @@ class LoginController extends Controller
             $_SESSION['nome'] = $ususario->name;
             $_SESSION['email'] = $ususario->email;
 
-            return redirect()->route('app.clientes');
+            return redirect()->route('app.home');
         } else {
             return redirect()->route('site.login', ['erro' => 1]);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        session_destroy();
+        return redirect()->route('site.index');
     }
 }
