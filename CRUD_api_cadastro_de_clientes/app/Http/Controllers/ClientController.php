@@ -95,4 +95,18 @@ class ClientController extends Controller
         // Retorno do cliente atualizado
         return response()->json(['client' => $client], 200);
     }
+
+    public function destroy($id)
+    {
+        $client = Client::find($id);
+
+        if (!$client) {
+            return response()->json(['message' => 'Cliente não encontrado.'], 404);
+        }
+
+        // Soft delete do cliente
+        $client->delete();
+
+        return response()->json(['message' => 'Cliente excluído com sucesso.'], 200);
+    }
 }
