@@ -8,7 +8,30 @@ use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
+    public function index(Request $request)
+    {
+        $query = Client::query();
 
+        // Filtragem por nome
+        if ($request->has('nome')) {
+            $query->where('nome', 'like', '%' . $request->input('nome') . '%');
+        }
+
+        // Filtragem por CPF
+        if ($request->has('cpf')) {
+            $query->where('cpf', 'like', '%' . $request->input('cpf') . '%');
+        }
+
+        // Filtragem por data de nascimento
+        if ($request->has('date_birth')) {
+            $query->where('date_birth', $request->input('date_birth'));
+        }
+
+        // Retornar a lista de clientes
+        $clients = $query->get();
+
+        return response()->json(['clients' => $clients], 200);
+    }
     public function store(Request $request)
     {
         // Validação dos dados
