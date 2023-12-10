@@ -1,17 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use App\Console\Commands\CheckDrawsAndNotifyWinners;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/test-email-notification', function () {
+    Artisan::call(CheckDrawsAndNotifyWinners::class);
+    return 'Tarefa programada executada manualmente.';
+});
 
 Route::get('/', function () {
     return view('welcome');
