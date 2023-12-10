@@ -6,7 +6,7 @@ use App\Http\Controllers\ClientController;
 
 Route::post('/clients', [ClientController::class, 'store']);
 Route::get('/clients', [ClientController::class, 'index']);
-
+Route::PUT('/clients/{id}', [ClientController::class, 'update']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

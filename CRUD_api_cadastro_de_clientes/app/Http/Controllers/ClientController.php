@@ -60,4 +60,39 @@ class ClientController extends Controller
         // Retorno do cliente criado
         return response()->json(['client' => $client], 201);
     }
+
+    public function update(Request $request, $id)
+    {
+        // Validação dos dados
+        $validator = Validator::make($request->all(), [
+            'nome' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'cpf' => 'required|string|max:14',
+            'date_birth' => 'required|date',
+            'address' => 'required|string|max:255',
+        ]);
+
+        // Se a validação falhar, retorne os erros
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // Atualização do cliente
+        $client = Client::find($id);
+
+        if (!$client) {
+            return response()->json(['message' => 'Cliente não encontrado.'], 404);
+        }
+
+        $client->update([
+            'nome' => $request->input('nome'),
+            'email' => $request->input('email'),
+            'cpf' => $request->input('cpf'),
+            'date_birth' => $request->input('date_birth'),
+            'address' => $request->input('address'),
+        ]);
+
+        // Retorno do cliente atualizado
+        return response()->json(['client' => $client], 200);
+    }
 }
