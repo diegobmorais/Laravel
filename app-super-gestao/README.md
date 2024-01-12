@@ -1,28 +1,24 @@
-# API - Academia SysTrain
-O Projeto Academia SysTrain consiste em uma API para gestão de alunos de uma academia, que permite o cadastro de usuários do sistema, alunos, treinos e exercicio, no projeto também é possivel enviar email de boas vindas para os novos usuários e gerar PDF de treinos da semana dos alunos.
+# API - Projeto Super Gestão
+O Projeto Super Gestão consiste em um sistema feito totalmente em laravel, para realizar cadastros, consultas e pesquisas de clientes, fornecedores e clientes. Não foi dado enfase em aspectos visuais do sistemas, o foco no projeto e aplicar todo conhecimento em rotas, middlewares, model, controllers, migrations, autentificações e cadastros no banco de dados.
 
 ## 🔧 Tecnologias utilizadas
 
 Projeto foi desenvolvido utilizando a linguagem PHP com framework Laravel. O banco de dados foi hospedado através do Docker utilizando PostgreSQL com DBeaver. 
 
 ### Vídeo de apresentação: 
-(https://drive.google.com/drive/folders/1Sf6MqVekAAVpdbJFeABDflO6NM8Ajzmg?usp=drive_link)
+[...]
 
 Seguem abaixo as depêndencias externas utilizadas:
 | Plugin | Uso |
 | ------ | ------ |
-| DOMPDF | Dompdf é um conversor de HTML para PDF, utilizado para gerar pdf dos treinos dos alunos |
+| ... | ... |
 
 ### Modelagem da base de dados PostgreSQL
-
-Modelo extraido do app DBeaver.
-
-![modelagem de dados api](https://github.com/diegobmorais/Projeto-M2-PHP/assets/128264029/b8ec5faf-cec3-4de5-8703-7f863bddfa69)
-
+[....]
 
 ## 🚀 Como executar o projeto
 
--Clonar o repositório https://github.com/diegobmorais/Projeto-M2-PHP
+-Clonar o repositório https://github.com/diegobmorais/Laravel.git
 
 -Criar uma base de dados no PostgreSQL com nome **bd_super_gestao**
 
