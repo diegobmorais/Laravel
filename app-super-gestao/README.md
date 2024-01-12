@@ -1,5 +1,5 @@
 # API - Projeto Super Gestão
-O Projeto Super Gestão consiste em um sistema feito totalmente em laravel, para realizar cadastros, consultas e pesquisas de clientes, fornecedores e clientes. Não foi dado enfase em aspectos visuais do sistemas, o foco no projeto e aplicar todo conhecimento em rotas, middlewares, model, controllers, migrations, autentificações e cadastros no banco de dados.
+O Projeto Super Gestão consiste em um sistema feito totalmente em laravel, para realizar cadastros, consultas e pesquisas de clientes, fornecedores e clientes. Não foi dado enfase em aspectos visuais do sistemas, o foco do projeto é aplicar todo conhecimento em rotas, middlewares, model, controllers, migrations, arquivos blade, autentificações e cadastros no banco de dados.
 
 ## 🔧 Tecnologias utilizadas
 
