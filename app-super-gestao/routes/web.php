@@ -1,28 +1,36 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\SobreNosController;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', 'App\Http\Controllers\PrincipalController@principal')->name('site.index');
+Route::get('/', [PrincipalController::class,'principal'])->name('site.index');
 
 
-Route::get('/sobre-nos', 'App\Http\Controllers\SobreNosController@sobreNos')->name('site.sobrenos');
+Route::get('/sobre-nos', [SobreNosController::class,'sobrenos'])->name('site.sobrenos');
 
-Route::get('/contato', 'App\Http\Controllers\ContatoController@contato')->name('site.contato');
-Route::post('/contato', 'App\Http\Controllers\ContatoController@save')->name('site.contato');
+Route::get('/contato', [ContatoController::class,'contato'])->name('site.contato');
+Route::post('/contato', [ContatoController::class,'save'])->name('site.contato');
 
 //rota para login no sistema
-Route::get('/login/{erro?}', 'App\Http\Controllers\LoginController@index')->name('site.login');
-Route::post('/login', 'App\Http\Controllers\LoginController@autenticar')->name('site.login');
+Route::get('/login/{erro?}', [LoginController::class,'index'])->name('site.login');
+Route::post('/login', [LoginController::class,'autenticar'])->name('site.login');
 
 // Agrupamento de rotas para /app
 Route::middleware('autenticacao:padrao')->prefix('/app')->group(function () {
-    Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('app.home');
-    Route::get('/logout', 'App\Http\Controllers\LoginController@logout')->name('app.logout');
-    Route::get('/cliente', 'App\Http\Controllers\ClienteController@index')->name('app.cliente');
-    Route::get('/fornecedor', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedor');
-    Route::get('/produto', 'App\Http\Controllers\ProdutoController@index')->name('app.produto');
+    Route::get('/home', [HomeController::class, 'index'])->name('app.home');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('app.logout');
+    Route::get('/cliente', [ClienteController::class, 'index'])->name('app.cliente');
+    Route::get('/fornecedor', [FornecedorController::class, 'index'])->name('app.fornecedor');
+    Route::get('/produto', [ProdutoController::class, 'index'])->name('app.produto');
 });
 
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('site.teste');
