@@ -164,8 +164,21 @@ button:hover {
     text-align: center;
 }
 
+.titulo-pagina-2 {
+    padding: 70px 0px 10px 0px;
+    margin-bottom: 10px;
+    background-color: #2a9ee2;
+    text-align: center;
+}
+
 .informacao-pagina {
     text-align: center;
+    margin-top: 30px;
+}
+.informacao-pagina-2 {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 30px;
 }
 

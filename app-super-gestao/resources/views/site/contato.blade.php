@@ -29,7 +29,7 @@
                 @endforeach
             </div>
         @endif
-        <div class="informacao-pagina">
+        <div class="informacao-pagina-2">
             <div class="contato-principal">
                 @component('site.layouts._components.form_contato')
                 @endcomponent
