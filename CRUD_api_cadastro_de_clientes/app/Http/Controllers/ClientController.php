@@ -35,13 +35,20 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         // Validação dos dados
-        $validator = Validator::make($request->all(), [
-            'nome' => 'required|string|max:255',
-            'email' => 'required|email|unique:clients|max:255',
-            'cpf' => 'required|string|unique:clients|max:14',
-            'date_birth' => 'required|date',
-            'address' => 'required|string|max:255',
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nome' => 'required|string|max:255',
+                'email' => 'required|email|unique:clients|max:255',
+                'cpf' => 'required|string|unique:clients|max:14',
+                'date_birth' => 'required|date',
+                'address' => 'required|string|max:255',
+            ],
+            [
+                'email.unique' => 'Este email já esta sendo utilizado',
+                'cpf.unique' => 'Este CPF já esta sendo utilizado',
+            ]
+        );
 
         // Se a validação falhar, retorne os erros
         if ($validator->fails()) {
