@@ -29,6 +29,7 @@
                         <th></th>
                     </tr>
                 </thead>
+                {{dd($produtos)}}
                 <tbody>
                      @foreach ($fornecedores as $fornecedor )
                     <tr>
@@ -36,13 +37,14 @@
                         <th>{{$fornecedor->site}}</th>
                         <th>{{$fornecedor->uf}}</th>
                         <th>{{$fornecedor->email}}</th>
-                        <th><a href="#">Excluir</a></th>
+                        <th><a href="{{route('app.fornecedor.excluir', $fornecedor->id)}}">Excluir</a></th>
                         <th><a href="{{route('app.fornecedor.editar', $fornecedor->id)}}">Editar</a></th>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-
+            <!--Paginação da tabela fornecedores-->
+            {{ $fornecedores->appends($request)->links() }}
         </div>
     </div>
 
