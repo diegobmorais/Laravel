@@ -25,8 +25,9 @@ class FornecedorController extends Controller
     public function adicionar(Request $request){
 
         $msg = '';
+        // teste para incluir dados
 
-        if($request->input('_token') != ''){
+        if($request->input('_token') != '' && $request->input('id') == ''){
             // validação dos dados
 
             $regras = [
@@ -52,7 +53,26 @@ class FornecedorController extends Controller
 
             $msg = "Cadastro realizado com SUCESSO!!";
         }
+        // teste para editar dados
+        if($request->input('_token') != '' && $request->input('id') != ''){
 
+            $fornecedor = Fornecedor::find($request->input('id'));
+            $update = $fornecedor->update($request->all());
+
+            if($update){
+                $msg = "Fornecedor atualizado com sucesso!!";
+            }else{
+                $msg = "Erro na atualização dos dados";
+            }
+            return redirect()->route("app.fornecedor.editar", ['id' =>$request->input('id'), 'msg' => $msg]);
+        }
         return view("app.fornecedor.adicionar", ['msg' => $msg]);
+    }
+
+    public function editar($id, $msg = ''){
+
+        $fornecedor = Fornecedor::find($id);
+
+        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'msg' => $msg]);
     }
 }

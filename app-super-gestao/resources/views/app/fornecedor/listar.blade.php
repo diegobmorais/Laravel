@@ -17,7 +17,7 @@
         </ul>
     </div>
     <div class="informacao-pagina">
-        <div style="width:90%; margin-left: auto; margin-right: auto;">
+        <div style="width:90%; margin-top: 50px; margin-left: auto; margin-right: auto;">
             <table border="1" width="100%">
                 <thead>
                     <tr>
@@ -36,8 +36,8 @@
                         <th>{{$fornecedor->site}}</th>
                         <th>{{$fornecedor->uf}}</th>
                         <th>{{$fornecedor->email}}</th>
-                        <th>Excluir</th>
-                        <th>Atualizar</th>
+                        <th><a href="#">Excluir</a></th>
+                        <th><a href="{{route('app.fornecedor.editar', $fornecedor->id)}}">Editar</a></th>
                     </tr>
                     @endforeach
                 </tbody>
