@@ -29,7 +29,6 @@
                         <th></th>
                     </tr>
                 </thead>
-                {{dd($produtos)}}
                 <tbody>
                      @foreach ($fornecedores as $fornecedor )
                     <tr>

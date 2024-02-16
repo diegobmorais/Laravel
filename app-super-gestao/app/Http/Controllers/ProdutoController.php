@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use App\Models\Unidade;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -12,7 +13,7 @@ class ProdutoController extends Controller
      */
     public function index( Request $request)   {
 
-        $produtos = Produto::simplePaginate(10);
+        $produtos = Produto::simplePaginate(5);
 
         return view("app.produto.index", ['produtos' => $produtos, 'request' => $request->all()]);
     }
@@ -22,7 +23,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        $unidades = Unidade::all();
+        return view("app.produto.create", ['unidades' => $unidades]);
     }
 
     /**
@@ -30,7 +32,25 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:2000',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidade,id',
+        ];
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'nome.min' => 'O campo nome deve ter no minimo 3 caracteres',
+            'nome.max' => 'O campo nome deve ter no maximos 40 caracteres',
+            'descricao.min' => 'O campo descrição deve ter no minimo 3 caracteres',
+            'descricao.max' => 'O campo descrição deve ter no maximos 2000 caracteres',
+            'peso.integer' => 'O campo peso deve ser um inteiro',
+
+        ];
+        $request->validate($regras, $feedback);
+
+        Produto::create($request->all());
+        return redirect()->route("produto.index");
     }
 
     /**
